@@ -6,7 +6,8 @@ export const MessageSubmitBtn = styled.button`
   color: white;
   border: 0.1rem solid black;
   border-radius: 0.5rem;
-  padding: 0.25rem 1rem;
+  letter-spacing: 0.05ch;
+  padding: 0.75rem 1rem;
   transition: 0.25s;
 
   &:hover {
@@ -20,6 +21,7 @@ export const MessageInput = styled.input.attrs({ type: "text" })`
   flex-grow: 1;
   height: 2rem;
   border-radius: 0.5rem;
+  letter-spacing: 0.075ch;
   padding: 1.25rem;
 `;
 
@@ -31,6 +33,10 @@ export const MessageBarBox = styled.div`
   gap: 1rem;
   width: 100%;
   padding: 2rem;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
 `;
 
 const MessageBar = ({ className }) => {
