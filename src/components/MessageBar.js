@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 export const MessageSubmitBtn = styled.button`
@@ -32,18 +33,37 @@ export const MessageBarBox = styled.div`
   align-items: stretch;
   gap: 1rem;
   width: 100%;
-  padding: 2rem;
 
   @media (max-width: 400px) {
     flex-direction: column;
   }
 `;
 
-const MessageBar = ({ className }) => {
+const MessageBar = ({ className, addMessage }) => {
+  const [messageInput, setMessageInput] = useState("");
+
+  const handleSendMessage = () => {
+    addMessage(messageInput);
+    setMessageInput("");
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSendMessage();
+    }
+  };
+
   return (
     <MessageBarBox className={className}>
-      <MessageInput placeholder="Enter a message..." />
-      <MessageSubmitBtn>Send Message</MessageSubmitBtn>
+      <MessageInput
+        value={messageInput}
+        placeholder="Enter a message..."
+        onChange={(e) => setMessageInput(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
+      <MessageSubmitBtn onClick={handleSendMessage}>
+        Send Message
+      </MessageSubmitBtn>
     </MessageBarBox>
   );
 };
